@@ -1,0 +1,33 @@
+.course-section {
+  padding: 4rem 0;
+  background-color: var(--bg-color);
+}
+
+.course-header {
+  margin-bottom: 2rem;
+}
+
+.course-section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
+}
+
+.course-section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}

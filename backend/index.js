@@ -1,24 +1,33 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
+const db = require('./db');
+
+const authRoutes = require('./routes/auth');
+const coursesRoutes = require('./routes/courses');
+const lessonsRoutes = require('./routes/lessons');
+const progressRoutes = require('./routes/progress');
+const aiRoutes = require('./routes/ai');
 
 const app = express();
+
 app.use(cors());
+app.use(express.json());
 
-const lessons = [
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/courses', coursesRoutes);
+app.use('/api/lessons', lessonsRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/ask-ai', aiRoutes);
 
-    { title: "Intro", youtube_url: "https://youtu.be/video1" },
-    { title: "Lesson 2", youtube_url: "https://youtu.be/video2" },
-    { title: "Lesson 3", youtube_url: "https://youtu.be/video3" },
-    { title: "Lesson 4", youtube_url: "https://youtu.be/video4" },
-    { title: "Lesson 5", youtube_url: "https://youtu.be/video5" },
-    { title: "Lesson 6", youtube_url: "https://youtu.be/video6" }
-];
-
-
-app.get("/lessons", (req, res) => {
-    res.json(lessons);
+// Fallback/test route
+app.get('/', (req, res) => {
+    res.json({ message: 'LMS API is running' });
 });
 
-app.listen(5000, () => {
-    console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
